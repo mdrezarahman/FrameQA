@@ -39,3 +39,8 @@ flask_restful
 flask_cors
 rank_bm25
 qdrant_client==1.7.3
+
+# required additional dependencies for FrameQA project
+moviepy
+whisper
+whisper-timestamped

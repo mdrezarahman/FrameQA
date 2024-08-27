@@ -1,5 +1,6 @@
 {
     "modelContext": "deepset/roberta-base-squad2",
+    "model_whisper": "openai/whisper-small",
     "embedding": "miniLM",
 	"miniLM": {
 		"provider": "sentenceTransformer",
