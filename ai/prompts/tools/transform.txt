@@ -1,0 +1,15 @@
+async def transform(instructions: str, values: List[Any]) -> List[Any]:
+	Transforms values based on the provided instructions.
+
+	Example:
+		Instructions: "Transform to HTML and highlight positive numbers in green, negative in red."
+		Value: ['The revenue for 2023 is $4.5m, which represents a loss of $600K.']
+		Results returned: 
+			[
+				"<p>The revenue for 2023 is <span style='color: green;'>$4.5m</span>, which represents a loss of <span style='color: red;'>$600K</span>.</p>"
+			]
+
+	Additional Guidlines:
+		- This function is resource-intensive and time-consuming. 
+		- Optimize performance by passing arrays with multiple values 
+		  and avoiding looping.

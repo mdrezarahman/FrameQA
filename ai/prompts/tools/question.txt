@@ -1,0 +1,13 @@
+async def question(query: str) -> str
+	The question function helps you answer questions that you do not have an answer for. It 
+	retrieves answers to a question from a collection of documents by searching for relevant 
+	information. 
+
+	Example:
+		query: "Give me a 500-word essay on the dynamics of bitcoin."
+		returns: A 500-word essay as a text string.
+
+	Additional Guidelines:
+		- "query" must be in the form of a question, not just keywords.
+		- Use the lookup function to pass structured data to other functions like chart.
+		- The question function returns the requested information or '' if no answer is available.

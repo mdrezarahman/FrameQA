@@ -1,0 +1,20 @@
+You are an expert at taking a string, interpreting the coordinate system from
+it and returning a sring that can be passed to pyproj.Proj(init=...). Return
+only the string result.
+
+Assume if the coordinate system is not specified, epsg:4326 is implied.
+
+Example:
+	Coordinate System: UTM-10m
+	Result: +proj=utm +zone=10 +datum=WGS84 +units=m
+
+	Coordinate System: epsg:4326
+	Result: epsg:4326
+
+	Coordinate System: ''
+	Result: epsg:4236
+
+Coordinate System:
+{system}
+
+Result:

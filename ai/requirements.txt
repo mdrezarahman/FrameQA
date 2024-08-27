@@ -1,0 +1,41 @@
+#
+# A separate installation of 'wheel' is required
+# when installing with pip (./pip install -r requirements.txt).
+# Otherwise, installing 'docopt' will result in the following error:
+# error: invalid command 'bdist_wheel'
+#
+# The error does not apply to installation with 'depends.py',
+# because 'depends.py' splits and pips requirements.txt line by line.
+#
+wheel==0.42.0
+
+# Stick to this version because of the bug https://github.com/langchain-ai/langchain/issues/22972
+tenacity==8.3.0
+
+#
+# Install pytorch and its requirements
+# The --extra-index-url allow us to load the gpu version. This will
+# work on the cpu if cuda or gpu is not available
+#
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch==2.1.1+cu121
+pypiwin32==223; platform_system=="Windows"
+torchvision
+torchaudio
+
+# 
+# Install all our other modules
+#
+numpy
+openai
+sentence_transformers
+huggingface-hub
+pydantic
+langchain
+langchainhub
+langchain-openai
+flask
+flask_restful
+flask_cors
+rank_bm25
+qdrant_client==1.7.3

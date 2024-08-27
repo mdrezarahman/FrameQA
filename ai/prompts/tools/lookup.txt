@@ -1,0 +1,36 @@
+async def lookup(instructions: str, format: str) -> Any
+	This function searches documents for specific data based on provided 
+	instructions. Use 'question' for generative answers or when not sending 
+	results to another function.
+
+	Simple Lookup:
+		A simple lookup is straightforward, like '2023 Q1 revenue' or 
+		'taxes paid in 2007'.
+
+	Iterative Lookup:
+		An iterative lookup requires breaking it down into multiple queries, 
+		often for ranges or complex information like yearly revenue totals.
+
+	Geographical positions (latitude/longitude):
+		- When retrieving geogrpahical positions specify to retrieve the coordinate 
+		  as well!
+		- Convert geographical positions into decimal degrees format.
+
+	Additional Guidelines:
+		- 'instructions' should specify the data needed for lookup.
+		- 'format' is mandatory and specifies the exact data type of 
+		  the result you are looking for. The 'format' parameter as 
+		  a strict typscript type definiton. 
+		- The function returns the data in the specified format.
+		- For text answers displayed using 'display', use 'question'.
+		- Whenever looking up latitude/longitude geographical data, use the
+		  coord to system to convert to decimal degree format and 
+		  you must always lookup the coordinate system used!!!
+
+	Format Examples:
+		'string'
+		'number'
+		'[string]'
+		'[number]'
+		'{{ [year: number] : number}}'
+		'[{{ cityName: string, population: number }}]'

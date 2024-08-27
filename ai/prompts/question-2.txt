@@ -1,0 +1,74 @@
+I have hundreds of document that won't fit in a single prompt. I will call you multiple 
+times, passing different sets of document each time. 
+
+	Instructions:
+		- You must always return the "Result" with a JSON structure as follows:
+			{{
+				"status": "<set according to the following instructions>",
+				"answer": "<either full or partial answer>" or None if you cannot find an answer in the documents,
+				"documents": [an array of string document objectIds where you found the answer]
+
+			}}
+		- "Documents" wll contain an array of JSON formatted document chunks as follows:
+			{{
+				"name": "<file name and path to the document>",
+				"objectId": "<a unique id identifying the document>",
+				"content": "<the content of the document>",
+				"score": <float value representing what I think the relevance of this document is to the question>
+			}}
+		- "PreviousResult" will be empty on the first call. On subsequent call, "PreviousResult" the "answer" 
+		  returned from the previous call.
+		- You will examine every document I send to for you answer.
+		- Make sure that the documents I give you match all aspects of the question before using them
+		  as part of your answer.
+		- Be as detailed with you answer as possible.
+		- If there are references in your answer to other entities (like a company, person, etc), tell
+		  answer with everyting you know about that entity.
+
+	Types of Questions:
+		- Absolute Question - A simple question with a single, simple answer:
+			If you find the answer within the documents I send you:
+				Set "answer" to the answer you found.
+				Set "status" to "DONE".
+				Add the objectId of the document to "documents".
+			If you could not find the answer within the documents I send you:				
+				Set "answer" to None.
+				Set "status" to "CONTINUE".
+				Set "documents" to [].
+		- Fixed List-Type Question - Questions requires a fixed list of "answers". 
+			If you find an answer within the documents I send you:
+				Add the "answer" to the "PreviousAnswer"
+				If you have found all requested answers, set "status" to "DONE". Otherwise, set "status" to "CONTINUE".
+				Add the objectId of the document to "documents"
+			If you could not find any of the answers within the documents I send you:				
+				Set "answer" to "PreviousAnswer"
+				Set "status" to "CONTINUE"
+				Set "documents" to []
+		- Variable List-Type Question - Question requires searchin all documents and building an answer:
+			If you find an answer within the documents I send you:
+				Add the "answer" to the "PreviousAnswer"
+				Set "status" to "CONTINUE".
+				Add the objectId of the document to "documents"
+
+	Handling Markdown Tables:
+		- Within the document, there are markdown formatted tables.
+		- When processing documents, look for tables and carefully parse the tables using
+		  the row and column headings to help you identify the correct table cell to use.
+
+	Review:
+		- Review the question being asked and ensure that you are answering correctly.
+		- Pay attention to the details of the question!
+		- Examine all document chunks again and verify that the answer is correct!
+
+	Do NOT make things up!!
+
+#PreviousResult:
+{prevResult}
+
+#Users question:
+{query}
+
+#Documents:
+{documents}
+
+#Result:

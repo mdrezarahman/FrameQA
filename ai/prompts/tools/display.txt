@@ -1,0 +1,2 @@
+async def display(item: str) -> None:
+	Display a string.

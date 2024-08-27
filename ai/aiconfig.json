@@ -1,0 +1,164 @@
+{
+    "modelContext": "deepset/roberta-base-squad2",
+    "embedding": "miniLM",
+	"miniLM": {
+		"provider": "sentenceTransformer",
+		"model": "sentence-transformers/multi-qa-MiniLM-L6-cos-v1",
+		"tokens": 512
+	},
+    "embed4All": {
+        "provider": "embed4all",
+        "vectorSize": 384,
+        "tokens": 256
+    },
+    "chat": "ollama-server",
+    "openai-3.5-16K": {
+        "provider": "openai",
+        "genkey": "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",
+        "model": "gpt-3.5-turbo-16k",
+        "modelResponseTokens": 16300,
+        "modelTotalTokens": 16385
+    },
+    "openai-3.5-4K": {
+        "provider": "openai",
+        "genkey": "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",
+        "model": "gpt-3.5-turbo",
+        "modelResponseTokens": 4000,
+        "modelTotalTokens": 4096
+    },
+    "openai-4-128K": {
+        "provider": "openai",
+        "genkey": "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",
+        "model": "gpt-4-turbo",
+        "modelResponseTokens": 128000,
+        "modelTotalTokens": 16384
+    },
+    "ollama-server": {
+        "provider": "openai",
+        "model": "llama3",
+        "serverbase": "http://localhost:11434/v1"
+    },
+    "store": "qdrant",
+    "qdrant": {
+        "provider": "qdrant",
+        "collection": "APARAVI",
+        "host": "localhost",
+        "port": 6333,
+        "similarity": "Cosine",
+        "renderChunkSize": 1000
+    },
+    "preprocessor": {
+        "chunk_size": 512,
+        "chunk_overlap": 0,
+        "keep_separator": true,
+        "strip_whitespace": true
+    },
+	"schema": {
+        "type": "object",
+        "properties": {
+            "chatType": {
+                "type": "string",
+                "title": "Type",
+                "enum": [
+                    "openai",
+                    "llamacpp"
+                ],
+                "enumNames": [
+                    "Openai",
+                    "Ollama"
+                ]
+            }
+        },
+        "dependencies": {
+            "chatType": {
+                "oneOf": [
+                    {
+                        "properties": {
+                            "chatType": {
+                                "enum": [
+                                    "openai"
+                                ]
+                            },
+                            "chat": {
+                                "type": "string",
+                                "title": "Model",
+                                "enum": [
+                                    "openai-3.5-16K",
+                                    "openai-3.5-4K",
+                                    "openai-4-128K"
+                                ]
+                            },
+                            "genkey": {
+                                "type": "string",
+                                "title": "API Key"
+                            }
+                        },
+                        "required": [
+                            "chat",
+                            "genkey"
+                        ]
+                    },
+                    {
+                        "properties": {
+                            "chatType": {
+                                "enum": [
+                                    "llamacpp"
+                                ]
+                            },
+                            "chat": {
+                                "type": "string",
+                                "title": "Model",
+                                "enum": [
+                                    "ollama-server"
+                                ]
+                            },
+                            "model": {
+                                "type": "string",
+                                "title": "Ollama Model",
+                                "enum": [
+                                    "llama3",
+                                    "llama3:70b",
+                                    "phi3",
+                                    "phi3:medium",
+                                    "gemma2",
+                                    "gemma2:27b",
+                                    "mistral",
+                                    "moondream",
+                                    "neural-chat",
+                                    "starling-lm",
+                                    "codellama",
+                                    "llama2-uncensored",
+                                    "llava",
+                                    "solar"
+                                ]
+                            },
+                            "serverbase": {
+                                "type": "string",
+                                "title": "Server URL",
+                                "default": "http://localhost:11434/v1"
+                            }
+                        },
+                        "required": [
+                            "chat",
+                            "serverbase",
+                            "model"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "uiSchema": {
+        "ui:submitButtonProps": {
+            "norender": true
+        },
+        "ui:order": [
+            "chatType",
+            "chat",
+            "model",
+            "serverbase",
+            "genkey"
+        ]
+    },
+    "chatType": "llamacpp"
+}

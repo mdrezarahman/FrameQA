@@ -1,0 +1,10 @@
+async def llm(instructions: str, context: Any) -> str:
+	Provides access to an LLM to carry out instructions on
+	te context provided.
+
+	Example:
+		Instructions: 'Write a 500 word essay on the virtues of Bitcoin'
+		Context: 'I know nothing about Bitcoin'
+		Results returned: 
+			'Bitcoint is...'
+		(uses LLMs internal knowledge of Bitcoin)

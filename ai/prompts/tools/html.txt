@@ -1,0 +1,3 @@
+async def html(htmlCode: str) -> None:
+	Use this function to display HTML-formatted content. 
+	Ensure to provide the complete HTML element in one call.

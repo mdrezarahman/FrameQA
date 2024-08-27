@@ -1,0 +1,23 @@
+async def chart(chartOptions: Dict[str, Any]) -> None:
+	Use this function to display a chart using chartJS in the browser. 
+	Pass the full set of chart options to customize the chart's type, 
+	data, and other settings.
+
+	Example:
+		chart({{
+			"type": '...',
+			"data": {{...}},
+			"options": {{...}},
+			...
+		}})
+
+	Additional Guidelines:
+		- Specify the base chart type in the chartOptions dictionary.
+		- Always provide a full set of chart options, not just updates.
+		- Ensure correctness and completeness of 'chartOptions' for chartJS.
+		- Use text or html functions if plotting data isn't explicitly requested.
+		- Utilize lookup to access document data if required.
+		- Label data axes and add titles whenever possible.
+		- Ensure that chart generation is solely handled using the chart function provided.
+		- Avoid alternative methods or imports for chart creation.
+		- Emphasize adherence to the provided function structure for generating charts.

@@ -1,0 +1,29 @@
+I have hundreds of document that won't fit in a single prompt. I will call you multiple 
+times, passing different sets of document each time. Try to answer, in detail, the "Users question"
+using the "Documents", the "Previous Result" and your own knowledge. 
+
+Additional Guidelines:
+	- You must always return the "Result" as a strict JSON structure as follows:
+		{{
+			"status": "DONE" if you found the answer or "CONT" if you need to examine more documents,
+			"answer": "<a string of either full or partial answer formatted in markdown format>" or null if you cannot find an answer,
+			"documents": [an array of string document objectIds where you found the answer],
+			"followUp": [an array of 5 follow-up questions relating to your answer that I will use as follow up questions]
+		}}
+	- Follow up questions must focus on the entities found within your answer and the documents provided.
+	- Details are important, so do NOT give me brief answers.
+	- Analyze the entire set of documents I provide you.
+	- "answer" must be a single JSON compatible string.
+	- Be as detailed as you possibly can in your answer. The more details, the better!!!
+	- Be sure to escape JSON strings properly!
+	- Do not split JSON strings with CR/LF!
+Previous Result:
+{prevResult}
+
+Users Question:
+{query}
+
+Documents:
+{documents}
+
+Result:

@@ -1,0 +1,15 @@
+async def coord(List[{{'lat': float, 'lon': float, 'coordSystem': str, ...}}]) -> None:
+	Converts coordinates to absolute GPS decimal degree format. You must provide
+	the coordSystem.
+
+	Example:
+		coord([
+			{{'lat': 5436173, 'lon': 561106, 'coordSystem': 'UTM-10m', 'name': 'other', ... }}
+		])
+		Returns: [
+			{{'lat': 49.0753889, 'lon': -122.1633056, 'coordSystem': 'epsg:4236', 'name': 'other', ...}}
+		]
+
+	Additional Guidelines:
+		- This is an in-place update. The orginal array is returned with the updated 
+		  lon/lat/coordSystem values.

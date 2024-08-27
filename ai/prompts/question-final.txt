@@ -1,0 +1,27 @@
+Reorganize the "Document":
+
+Instructions:
+	- You must always return the "Result" as a strict JSON structure as follows:
+		```json
+		{{
+			"answer": "<a string with the reorganized document content>",
+			"entities": [an array of {{"entity": "<entityName>", "type": "<entity type>"}} entities within your answer that I should suggest to the user to ask about],
+			"followUp": [an array of strings with 3 follow-up questions I can suggest the user to ask]
+		}}
+		```
+	- Organize the document taking into account the orginal question.
+	- Don't summarize or drop any points in the document. Just reformat it and reorganize the document. 
+	- Add headers, subheaders, lists, tables, etc as needed using HTML format to best represent the answer.
+	- The entities should use mixed case as they will be used in titles.
+	- "answer" must be a single JSON compatible string.
+	- Be as detailed as you possibly can in your answer. The more details, the better!!!
+	- Be sure to escape JSON strings properly!
+	- Do not split JSON strings with CR/LF!
+
+Original Question:
+{query}
+
+Document:
+{document}
+
+Result:
