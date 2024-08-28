@@ -43,7 +43,7 @@
     "store": "qdrant",
     "qdrant": {
         "provider": "qdrant",
-        "collection": "APARAVI",
+        "collection": "APARAVI-FrameQA-DB",
         "host": "localhost",
         "port": 6333,
         "similarity": "Cosine",

@@ -1,6 +1,7 @@
 import av
 import torch
 import numpy as np
+from huggingface_hub import hf_hub_download
 from transformers import VideoLlavaForConditionalGeneration, VideoLlavaProcessor, BitsAndBytesConfig
 
 def read_video_pyav(container, indices):
@@ -38,7 +39,7 @@ model = VideoLlavaForConditionalGeneration.from_pretrained(
 ).to(0)
 processor = VideoLlavaProcessor.from_pretrained("LanguageBind/Video-LLaVA-7B-hf")
 
-# Load the video as an np.arrau, sampling uniformly 8 frames
+# Load the video as an np.array, sampling uniformly 8 frames
 video_path = hf_hub_download(repo_id="raushan-testing-hf/videos-test", filename="sample_demo_1.mp4", repo_type="dataset")
 container = av.open(video_path)
 total_frames = container.streams.video[0].frames

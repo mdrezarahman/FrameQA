@@ -12,7 +12,7 @@ class FrameProcessor():
         Analyze frame information 
         '''
         self.start_timestamp = 0.5
-        self.step_timestamp = 2.5
+        self.step_timestamp = 2
         self.config = Config.getConfig()
         self.model = self.config.get('model', "gpt-3.5-turbo")
         self.prompt = ("Please generate a concise but detailed description for this image. "
@@ -25,11 +25,12 @@ class FrameProcessor():
     def process_frames(self, video_clip):
         result = []
         t = self.start_timestamp
+        self.step_timestamp = video_clip.duration // 2 # temporarily support only 2 frames per video 
         while (t <= video_clip.duration):
             image = video_clip.make_frame(t)
             success, encoded_image = cv2.imencode('.png', image)
             bytes_image = encoded_image.tobytes()
-
+           
             tmp_result = ollama.generate(
                 model='llava',
                 prompt=self.prompt,
@@ -54,7 +55,7 @@ class FrameProcessor():
 
         for result in results:
             prompt += "frame position: " + str(result["timestamp"]) + " sec\n"
-            prompt += "corresponding text representation of the frame:" + result["text"] + "\n"
+            prompt += "corresponding text representation of the frame: " + result["text"] + "\n\n"
         
         return prompt
         
