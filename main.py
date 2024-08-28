@@ -2,6 +2,7 @@ from moviepy.editor import VideoFileClip
 from ai.providers.store.qdrant import Store
 from ai.video_analyzer.audio_processor import AudioProcessor
 from ai.video_analyzer.frame_processor import FrameProcessor
+from ai.video_analyzer.clip_processor import ClipProcessor
 
 import os
 import openai
@@ -58,18 +59,19 @@ class IndexingDriver():
         # video_path = "E:/test_dataset/hackathon_dataset/TU Munich 1.mp4"
         video_clip = VideoFileClip(video_path)
         audio_proc = AudioProcessor()
-        frame_proc = FrameProcessor()
         audio_text = audio_proc.process_audio(video_clip=video_clip)
+        del audio_proc
+        # clip_proc = ClipProcessor()
+        # clip_text  = clip_proc.process_clip(video_clip=video_clip)
+        # del clip_proc
+        frame_proc = FrameProcessor()
         frame_text = frame_proc.process_frames(video_clip=video_clip)
-        final_text = audio_text + "\n\n" + frame_text
+        del frame_proc
         print(audio_text)
-        print("\n")
-        print("\n")
         print("=========================================================")
-        print("\n")
-        print("\n")
-        print(final_text)
-        return final_text
+        print(frame_text)
+        # print("=========================================================")
+        # print(clip_text)
 
 
 if __name__ == "__main__":

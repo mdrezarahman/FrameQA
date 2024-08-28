@@ -11,17 +11,17 @@ class FrameProcessor():
         '''
         Analyze frame information 
         '''
-        self.start_timestamp = 0.5
-        self.step_timestamp = 2
+        self.start_timestamp = 0.0
+        self.step_timestamp = 10
         self.config = Config.getConfig()
-        self.model = self.config.get('model', "gpt-3.5-turbo")
+        self.model = self.config.get('model', "llava")
         self.prompt = ("Please generate a concise but detailed description for this image. "
                        "Ensure the description meticulously covers all visible elements. "
                        "Include details of any text, objects, people, colors, textures, and "
                        "spatial relationships. Highlight contrasts, interactions, and any "
                        "notable features that stand out. Avoid assumptions and focus only "
                        "on what is clearly observable in the image.")
-
+    
     def process_frames(self, video_clip):
         result = []
         t = self.start_timestamp
